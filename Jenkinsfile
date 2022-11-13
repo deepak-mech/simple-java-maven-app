@@ -40,7 +40,7 @@ pipeline {
     
     stage ('deploy code') {
       steps {
-        'java -jar **/target/*.jar'
+        sh 'java -jar **/target/*.jar'
       }
     }
   }
