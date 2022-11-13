@@ -2,10 +2,15 @@ pipeline {
   
   agent any
   
+  tools {
+    maven 'maven-3.8.6' 
+  }
+  
   stages {
     
     stage ("compile code") {
       steps {
+        sh 'mvn --version'
         sh 'mvn compile'
       }
     }
