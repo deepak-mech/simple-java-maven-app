@@ -37,6 +37,12 @@ pipeline {
         }
       }
     }
+    
+    stage ('deploy code') {
+      steps {
+        'java -jar **/target/*.jar'
+      }
+    }
   }
 }
       
