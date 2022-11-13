@@ -38,9 +38,15 @@ pipeline {
       }
     }
     
-    stage ('deploy code') {
+    stage ("deploy code") {
       steps {
         sh 'java -jar target/*.jar'
+      }
+    }
+    
+    stage ("Upload artifact to S3") {
+      steps {
+        s3Upload entries: [[bucket: 'jenkins-java-maven-artifact', excludedFile: '', flatten: false, gzipFiles: false, keepForever: false, managedArtifacts: false, noUploadOnFailure: true, selectedRegion: 'us-east-1', showDirectlyInBrowser: false, sourceFile: 'target/*.jar', storageClass: 'STANDARD', uploadFromSlave: false, useServerSideEncryption: false]], pluginFailureResultConstraint: 'FAILURE', profileName: 's3-artifact', userMetadata: []
       }
     }
   }
